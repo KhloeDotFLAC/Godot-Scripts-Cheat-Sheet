@@ -21,35 +21,34 @@ public partial class InputHandler : Node
     public override void _Input(InputEvent @event)
     {
         // [Events]
-        if (@event is InputEventKey pKey)
+        if (@event is InputEventKey CurKey)
         {
-            switch (pKey.Keycode)
+            switch (CurKey.Keycode)
             {
                 case Key.Escape:
                     // Pressed Escape
-                    PressedEsc?.Invoke();            
+                    if (CurKey.Pressed) PressedEsc?.Invoke();
                     break;
                 case Key.Tab:
                     // Pressed Tab
-                    PressedTab?.Invoke();
+                    if (CurKey.Pressed) PressedTab?.Invoke();
 
                     // Holding Tab
-                    IsHoldingTab = pKey.Pressed;
-                    GD.Print("Holding tab" + IsHoldingTab);
+                    IsHoldingTab = CurKey.Pressed;
                     break;
                 case Key.Shift:
                     // Pressed Shift
-                    PressedShift?.Invoke();
+                    if (CurKey.Pressed) PressedShift?.Invoke();
 
                     // Holding Shift
-                    IsHoldingShift = pKey.Pressed;
+                    IsHoldingShift = CurKey.Pressed;
                     break;
                 case Key.Ctrl:
                     // Pressed Ctrl
-                    PressedCtrl?.Invoke();
+                    if (CurKey.Pressed) PressedCtrl?.Invoke();
 
                     // Holding Ctrl
-                    IsHoldingCtrl = pKey.Pressed;
+                    IsHoldingCtrl = CurKey.Pressed;
                     break;
             }
         }

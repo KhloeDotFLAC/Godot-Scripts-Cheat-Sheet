@@ -23,22 +23,22 @@ func _input(event: InputEvent):
 		match key_event.keycode:
 			KEY_ESCAPE:
 				# Pressed Escape
-				pressed_esc.emit()
+				if key_event.pressed: pressed_esc.emit()
 			KEY_TAB:
 				# Pressed Tab
-				pressed_tab.emit()
+				if key_event.pressed: pressed_tab.emit()
 
 				# Holding Tab
 				is_holding_tab = key_event.pressed
 			KEY_SHIFT:
 				# Pressed Tab
-				pressed_shift.emit()
+				if key_event.pressed: pressed_shift.emit()
 
 				# Holding Tab
 				is_holding_shift = key_event.pressed
 			KEY_CTRL:
 				# Pressed Ctrl
-				pressed_ctrl.emit()
+				if key_event.pressed: pressed_ctrl.emit()
 
 				# Holdng Ctrl
 				is_holding_ctrl = key_event.pressed
