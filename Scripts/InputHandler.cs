@@ -23,65 +23,34 @@ public partial class InputHandler : Node
         // [Events]
         if (@event is InputEventKey pKey)
         {
-            if (pKey.IsPressed() && (pKey.Keycode == Key.Escape))
+            switch (pKey.Keycode)
             {
-                // Pressed Escape
-                PressedEsc?.Invoke();
-            }
+                case Key.Escape:
+                    // Pressed Escape
+                    PressedEsc?.Invoke();            
+                    break;
+                case Key.Tab:
+                    // Pressed Tab
+                    PressedTab?.Invoke();
 
-            if (pKey.IsPressed() && (pKey.Keycode == Key.Tab))
-            {
-                // Pressed Tab
-                PressedTab?.Invoke();
-            }
+                    // Holding Tab
+                    IsHoldingTab = pKey.Pressed;
+                    GD.Print("Holding tab" + IsHoldingTab);
+                    break;
+                case Key.Shift:
+                    // Pressed Shift
+                    PressedShift?.Invoke();
 
-            if (pKey.IsPressed() && (pKey.Keycode == Key.Shift))
-            {
-                // Pressed Shift
-                PressedShift?.Invoke();
-            }
+                    // Holding Shift
+                    IsHoldingShift = pKey.Pressed;
+                    break;
+                case Key.Ctrl:
+                    // Pressed Ctrl
+                    PressedCtrl?.Invoke();
 
-            if (pKey.IsPressed() && (pKey.Keycode == Key.Ctrl))
-            {
-                // Pressed Ctrl
-                PressedCtrl?.Invoke();
-            }
-        }
-
-        // [Holds]
-        if (@event is InputEventKey curKey)
-        {
-            if (curKey.IsPressed() && (curKey.Keycode == Key.Tab))
-            {
-                // Holding Tab key
-                IsHoldingTab = true;
-            }
-            else if (curKey.IsReleased() && (curKey.Keycode == Key.Tab))
-            {
-                // Released Tab key
-                IsHoldingTab = false;
-            }
-
-            if (curKey.IsPressed() && (curKey.Keycode == Key.Shift))
-            {
-                // Holding Shift key
-                IsHoldingShift = true;
-            }
-            else if (curKey.IsReleased() && (curKey.Keycode == Key.Shift))
-            {
-                // Released Shift key
-                IsHoldingShift = false;
-            }
-
-            if (curKey.IsPressed() && (curKey.Keycode == Key.Ctrl))
-            {
-                // Holding Shift key
-                IsHoldingCtrl = true;
-            }
-            else if (curKey.IsReleased() && (curKey.Keycode == Key.Ctrl))
-            {
-                // Released Shift key
-                IsHoldingCtrl = false;
+                    // Holding Ctrl
+                    IsHoldingCtrl = pKey.Pressed;
+                    break;
             }
         }
 

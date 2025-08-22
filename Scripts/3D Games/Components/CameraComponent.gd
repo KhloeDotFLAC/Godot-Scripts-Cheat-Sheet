@@ -1,5 +1,4 @@
 extends Node3D
-class_name CameraComponent
 
 # Setup
 @export var rotate_parent: bool = true
