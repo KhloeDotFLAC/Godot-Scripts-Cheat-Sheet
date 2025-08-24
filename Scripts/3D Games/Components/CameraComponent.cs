@@ -10,7 +10,6 @@ public partial class CameraComponent : Node3D
 
     // Camera
     [Export] private float MouseSensitivity = 0.005f;
-
     [Export] private float MaxVerticalAngleInRadians = 1.5f;
 
     public override void _Ready()
@@ -25,7 +24,7 @@ public partial class CameraComponent : Node3D
         }
     }
 
-    public override void _Input(InputEvent @event)
+    public override async void _Input(InputEvent @event)
     {
         if (@event is InputEventMouseMotion mouseMotion)
         {
@@ -37,9 +36,15 @@ public partial class CameraComponent : Node3D
 
             // Horizontal rotation
             if (RotateParent && CurrentParent != null)
+            {
+                await ToSignal(GetTree(), "physics_frame");
                 CurrentParent.RotateY(-mouseMotion.Relative.X * MouseSensitivity);
+            }
             else
+            {
+                await ToSignal(GetTree(), "physics_frame");
                 this.RotateY(-mouseMotion.Relative.X * MouseSensitivity);
+            }
 
             // Vertical rotation (on self)
             float desiredXAngle = -mouseMotion.Relative.Y * MouseSensitivity;

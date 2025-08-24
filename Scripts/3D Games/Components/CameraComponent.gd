@@ -8,7 +8,6 @@ var current_parent: Node3D
 
 # Camera
 @export var mouse_sensitivity: float = 0.005
-
 @export var max_vertical_angle_in_radians: float = 1.5
 
 func _ready():
@@ -27,8 +26,10 @@ func _input(event: InputEvent):
 		
 		# Horizontal rotation
 		if rotate_parent and current_parent != null:
+			await get_tree().physics_frame
 			current_parent.rotate_y(-mouse_motion.relative.x * mouse_sensitivity)
 		else:
+			await get_tree().physics_frame
 			rotate_y(-mouse_motion.relative.x * mouse_sensitivity)
 		
 		# Vertical rotation (on self)
