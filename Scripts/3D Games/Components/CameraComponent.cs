@@ -1,5 +1,10 @@
 using Godot;
 
+/* Notes:
+    Remember to, in "physics/common", change the Jitter Fix slide to 0, and activate Physics Interpolation.
+    It helps with the camera jittering when circle-strafing due to the difference between process and physics frames.
+*/
+
 public partial class CameraComponent : Node3D
 {
     // Setup
